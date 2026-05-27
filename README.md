@@ -94,6 +94,13 @@ The original case datasets are not included in this repository due to data prote
 
 The repository therefore supports methodological inspection and partial reproducibility of the pipeline logic, but not full data-level reproduction without access to the protected dataset.
 
+## Running the pipeline
+
+To run the notebook, place an authorised local copy of the structured case dataset in the repository root or update `DATA_PATH` to point to its location. Then set `CASE_ID` to a valid local case identifier and choose either `descriptive` or `predictive` as `GRAPH_VARIANT`.
+
+The repository does not include the protected datasets and therefore cannot be executed end-to-end without authorised data access.
+
+
 ## Dependencies
 
 ```
