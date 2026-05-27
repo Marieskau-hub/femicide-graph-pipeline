@@ -1,0 +1,30 @@
+cat > .gitignore <<'EOF'
+# Sensitive/raw data
+*.xlsx
+*.xls
+*.csv
+
+# Excel temporary files
+~$*
+
+# Generated graph exports
+exports_v7_descriptive/
+exports_v7_predictive/
+
+# Model/data artifacts
+*.pt
+*.pkl
+*.parquet
+*.json
+
+# macOS
+.DS_Store
+
+# Python/Jupyter
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+EOF
+
+!v7_graph_v7-2-3.xlsx
+!v7_documentation.xlsx
