@@ -88,7 +88,11 @@ uploaded = files.upload()  # upload Stat_FW.xlsx
 | Offender | 1 (age) + 19 rf_keys × 2 | **39** |
 | Victim | 1 (age) + 9 rf_keys × 2 | **19** |
 
----
+## Data availability and reproducibility
+
+The original case datasets are not included in this repository due to data protection and sensitivity restrictions. The code is provided to document the graph-construction pipeline and can be run only with authorised local access to structured case data following the FDO schema.
+
+The repository therefore supports methodological inspection and partial reproducibility of the pipeline logic, but not full data-level reproduction without access to the protected dataset.
 
 ## Dependencies
 
