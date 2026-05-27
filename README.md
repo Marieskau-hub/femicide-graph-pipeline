@@ -1,10 +1,10 @@
 # femicide-graph-pipeline
 
-Graph-based computational framework for representing intimate partner femicide (IPF) cases as heterogeneous property graphs suitable for GNN classification.
+Graph-based computational framework for representing intimate partner femicide cases as heterogeneous property graphs suitable for GNN classification.
 
 Developed as part of an MSc thesis in Software Design at IT University of Copenhagen, in collaboration with Center for Voldsforebyggelse (CFV).
 
-**Dataset:** STAT_FW (not included — contact CFV)
+**Dataset:** STAT_FW (not included)
 
 ---
 
@@ -69,7 +69,7 @@ The v7 schema implements nine design principles (P1–P9):
 #   Canonical corpus forward passes: 28/28 succeeded
 ```
 
-The repository does not include the protected datasets. Place an authorised copy of `Stat_FW.xlsx` in the repository root or update `DATA_PATH` before running.
+The repository does not include the protected datasets. Place an authorised copy of `Stat_FW.xlsx` in the repository root or update `DATA_PATH` before run
 
 ---
 
@@ -119,7 +119,7 @@ The repository does not include the protected datasets. Place an authorised copy
 
 ## Data availability and reproducibility
 
-The original case datasets are not included due to data protection restrictions. The code documents the graph-construction pipeline and can be run only with authorised access to structured case data following the FDO schema (contact Center for Voldsforebyggelse).
+The original case datasets are not included due to data protection restrictions. The code documents the graph-construction pipeline and can be run only with authorised access to structured case data following the FDO schema 
 
 The repository supports methodological inspection and partial reproducibility of the pipeline logic, but not full data-level reproduction without the protected dataset.
 
