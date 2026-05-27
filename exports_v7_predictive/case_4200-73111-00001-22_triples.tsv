@@ -1,0 +1,28 @@
+source	edge_type	target	attrs
+CASE_4200-73111-00001-22	HAS_PARTICIPANT	PERSON_4200-73111-00001-22_O	{"role": "offender", "scope": "case"}
+CASE_4200-73111-00001-22	HAS_PARTICIPANT	PERSON_4200-73111-00001-22_V	{"role": "victim", "scope": "case"}
+PERSON_4200-73111-00001-22_V	SEPARATED_FROM	PERSON_4200-73111-00001-22_O	{"scope": "case", "stage": "prior", "months": "0", "value": "1", "observed": "1"}
+PERSON_4200-73111-00001-22_V	HAS_NEW_PARTNER	PERSON_4200-73111-00001-22_O	{"scope": "case", "stage": "prior", "value": "0", "observed": "1"}
+PERSON_4200-73111-00001-22_O	CHILD_CUSTODY_DISPUTE	PERSON_4200-73111-00001-22_V	{"scope": "case", "stage": "prior", "value": "0", "observed": "1"}
+PERSON_4200-73111-00001-22_O	SHARED_CHILDREN	PERSON_4200-73111-00001-22_V	{"scope": "case", "stage": "prior", "value": "0", "observed": "1", "n": "0"}
+PERSON_4200-73111-00001-22_O	PRIOR_FAMILY_COURT_INVOLVEMENT	PERSON_4200-73111-00001-22_V	{"scope": "case", "stage": "prior", "value": "0", "observed": "1"}
+CASE_4200-73111-00001-22	HAS_PARTICIPANT	PERSON_4200-73111-00001-22_CHILD_1	{"role": "child", "scope": "case"}
+PERSON_4200-73111-00001-22_V	PARENT_OF	PERSON_4200-73111-00001-22_CHILD_1	{"scope": "case"}
+CASE_4200-73111-00001-22	HAS_PARTICIPANT	PERSON_4200-73111-00001-22_CHILD_2	{"role": "child", "scope": "case"}
+PERSON_4200-73111-00001-22_V	PARENT_OF	PERSON_4200-73111-00001-22_CHILD_2	{"scope": "case"}
+PERSON_4200-73111-00001-22_O	PRIOR_VIOLENCE	PERSON_4200-73111-00001-22_V	{"scope": "case", "stage": "prior", "value": "1", "observed": "1", "source_col": "prior_violence", "detail": "Convicted several crimes"}
+PERSON_4200-73111-00001-22_O	COERCIVE_CONTROL	PERSON_4200-73111-00001-22_V	{"scope": "case", "stage": "prior", "value": "1", "observed": "1", "source_col": "control"}
+PERSON_4200-73111-00001-22_O	ATTEMPTED_ISOLATION	PERSON_4200-73111-00001-22_V	{"scope": "case", "stage": "prior", "value": "1", "observed": "1", "source_col": "prior_attempts_isolate_victim"}
+PERSON_4200-73111-00001-22_O	PRIOR_STRANGULATION	PERSON_4200-73111-00001-22_V	{"scope": "case", "stage": "prior", "observed": "0", "source_col": "prior_strangulation"}
+PERSON_4200-73111-00001-22_O	THREATENED_WITH_WEAPON	PERSON_4200-73111-00001-22_V	{"scope": "case", "stage": "prior", "value": "0", "observed": "1", "source_col": "prior_threats_with_weapon"}
+PERSON_4200-73111-00001-22_O	ASSAULTED_WITH_WEAPON	PERSON_4200-73111-00001-22_V	{"scope": "case", "stage": "prior", "value": "0", "observed": "1", "source_col": "prior_assault_with_weapon"}
+PERSON_4200-73111-00001-22_O	ESCALATED_VIOLENCE	PERSON_4200-73111-00001-22_V	{"scope": "case", "stage": "prior", "value": "1", "observed": "1", "source_col": "escalation_of_violence"}
+PERSON_4200-73111-00001-22_O	STALKED	PERSON_4200-73111-00001-22_V	{"scope": "case", "stage": "prior", "value": "1", "observed": "1", "source_col": "obsessive_behaviour"}
+PERSON_4200-73111-00001-22_O	SEXUAL_JEALOUSY	PERSON_4200-73111-00001-22_V	{"scope": "case", "stage": "prior", "value": "1", "observed": "1", "source_col": "sexual_jealousy"}
+PERSON_4200-73111-00001-22_O	MISOGYNISTIC_ATTITUDES	PERSON_4200-73111-00001-22_V	{"scope": "case", "stage": "prior", "value": "1", "observed": "1", "source_col": "misogynistic_attitudes"}
+PERSON_4200-73111-00001-22_O	CONTROLLED_DAILY_ACTIVITIES	PERSON_4200-73111-00001-22_V	{"scope": "case", "stage": "prior", "value": "1", "observed": "1", "source_col": "controlled_victims_daily_activities"}
+PERSON_4200-73111-00001-22_O	THREATENED_SUICIDE	PERSON_4200-73111-00001-22_V	{"scope": "case", "stage": "prior", "value": "1", "observed": "1", "source_col": "threats_of_suicide"}
+PERSON_4200-73111-00001-22_O	YOUTH_COUPLE	PERSON_4200-73111-00001-22_V	{"scope": "case", "stage": "prior", "value": "0", "observed": "1", "source_col": "youth_couple"}
+PERSON_4200-73111-00001-22_V	YOUTH_COUPLE	PERSON_4200-73111-00001-22_O	{"scope": "case", "stage": "prior", "value": "0", "observed": "1", "source_col": "youth_couple"}
+PERSON_4200-73111-00001-22_O	THREATENED_HARMED_CHILD	PERSON_4200-73111-00001-22_CHILD_1	{"scope": "case", "stage": "prior", "value": "0", "observed": "1", "source_col": "offender_threatened_harmed_children"}
+PERSON_4200-73111-00001-22_O	THREATENED_HARMED_CHILD	PERSON_4200-73111-00001-22_CHILD_2	{"scope": "case", "stage": "prior", "value": "0", "observed": "1", "source_col": "offender_threatened_harmed_children"}

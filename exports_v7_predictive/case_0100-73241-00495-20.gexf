@@ -1,0 +1,653 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:gexf xmlns:ns0="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+  <ns0:meta lastmodifieddate="2026-05-24">
+    <ns0:creator>NetworkX 3.2.1</ns0:creator>
+  </ns0:meta>
+  <ns0:graph defaultedgetype="directed" mode="static" name="">
+    <ns0:attributes mode="static" class="edge">
+      <ns0:attribute id="96" title="edge_id" type="string" />
+      <ns0:attribute id="97" title="edge_type" type="string" />
+      <ns0:attribute id="98" title="edge_key" type="string" />
+      <ns0:attribute id="99" title="role" type="string" />
+      <ns0:attribute id="100" title="scope" type="string" />
+      <ns0:attribute id="101" title="networkx_key" type="long" />
+      <ns0:attribute id="102" title="stage" type="string" />
+      <ns0:attribute id="103" title="value" type="string" />
+      <ns0:attribute id="104" title="observed" type="string" />
+      <ns0:attribute id="105" title="n" type="string" />
+      <ns0:attribute id="106" title="source_col" type="string" />
+      <ns0:attribute id="107" title="detail" type="string" />
+    </ns0:attributes>
+    <ns0:attributes mode="static" class="node">
+      <ns0:attribute id="0" title="node_id" type="string" />
+      <ns0:attribute id="1" title="node_type" type="string" />
+      <ns0:attribute id="2" title="crime_date" type="string" />
+      <ns0:attribute id="3" title="verdict_date" type="string" />
+      <ns0:attribute id="4" title="case_solved" type="string" />
+      <ns0:attribute id="5" title="case_type" type="string" />
+      <ns0:attribute id="6" title="court_number" type="string" />
+      <ns0:attribute id="7" title="internal_police_number" type="string" />
+      <ns0:attribute id="8" title="type_of_femicide" type="string" />
+      <ns0:attribute id="9" title="children_present" type="string" />
+      <ns0:attribute id="10" title="role" type="string" />
+      <ns0:attribute id="11" title="age" type="string" />
+      <ns0:attribute id="12" title="gender" type="string" />
+      <ns0:attribute id="13" title="education" type="string" />
+      <ns0:attribute id="14" title="marital_status" type="string" />
+      <ns0:attribute id="15" title="rf_history_violence_outside_family_value" type="double" />
+      <ns0:attribute id="16" title="rf_history_violence_outside_family_observed" type="double" />
+      <ns0:attribute id="17" title="rf_history_violence_outside_family_stage" type="string" />
+      <ns0:attribute id="18" title="rf_history_domestic_violence_current_value" type="double" />
+      <ns0:attribute id="19" title="rf_history_domestic_violence_current_observed" type="double" />
+      <ns0:attribute id="20" title="rf_history_domestic_violence_current_stage" type="string" />
+      <ns0:attribute id="21" title="rf_history_domestic_violence_past_value" type="double" />
+      <ns0:attribute id="22" title="rf_history_domestic_violence_past_observed" type="double" />
+      <ns0:attribute id="23" title="rf_history_domestic_violence_past_stage" type="string" />
+      <ns0:attribute id="24" title="rf_threats_to_kill_other_value" type="double" />
+      <ns0:attribute id="25" title="rf_threats_to_kill_other_observed" type="double" />
+      <ns0:attribute id="26" title="rf_threats_to_kill_other_stage" type="string" />
+      <ns0:attribute id="27" title="rf_suicide_attempt_prior_value" type="double" />
+      <ns0:attribute id="28" title="rf_suicide_attempt_prior_observed" type="double" />
+      <ns0:attribute id="29" title="rf_suicide_attempt_prior_stage" type="string" />
+      <ns0:attribute id="30" title="rf_suicide_threats_prior_value" type="double" />
+      <ns0:attribute id="31" title="rf_suicide_threats_prior_observed" type="double" />
+      <ns0:attribute id="32" title="rf_suicide_threats_prior_stage" type="string" />
+      <ns0:attribute id="33" title="rf_sexual_assault_others_value" type="double" />
+      <ns0:attribute id="34" title="rf_sexual_assault_others_observed" type="double" />
+      <ns0:attribute id="35" title="rf_sexual_assault_others_stage" type="string" />
+      <ns0:attribute id="36" title="rf_excessive_alcohol_drug_use_value" type="double" />
+      <ns0:attribute id="37" title="rf_excessive_alcohol_drug_use_observed" type="double" />
+      <ns0:attribute id="38" title="rf_excessive_alcohol_drug_use_stage" type="string" />
+      <ns0:attribute id="39" title="rf_depressed_family_opinion_value" type="double" />
+      <ns0:attribute id="40" title="rf_depressed_family_opinion_observed" type="double" />
+      <ns0:attribute id="41" title="rf_depressed_family_opinion_stage" type="string" />
+      <ns0:attribute id="42" title="rf_depressed_professional_value" type="double" />
+      <ns0:attribute id="43" title="rf_depressed_professional_observed" type="double" />
+      <ns0:attribute id="44" title="rf_depressed_professional_stage" type="string" />
+      <ns0:attribute id="45" title="rf_access_or_possession_firearms_value" type="double" />
+      <ns0:attribute id="46" title="rf_access_or_possession_firearms_observed" type="double" />
+      <ns0:attribute id="47" title="rf_access_or_possession_firearms_stage" type="string" />
+      <ns0:attribute id="48" title="rf_access_to_victim_after_assessment_value" type="double" />
+      <ns0:attribute id="49" title="rf_access_to_victim_after_assessment_observed" type="double" />
+      <ns0:attribute id="50" title="rf_access_to_victim_after_assessment_stage" type="string" />
+      <ns0:attribute id="51" title="rf_hostage_taking_value" type="double" />
+      <ns0:attribute id="52" title="rf_hostage_taking_observed" type="double" />
+      <ns0:attribute id="53" title="rf_hostage_taking_stage" type="string" />
+      <ns0:attribute id="54" title="rf_destruction_of_property_value" type="double" />
+      <ns0:attribute id="55" title="rf_destruction_of_property_observed" type="double" />
+      <ns0:attribute id="56" title="rf_destruction_of_property_stage" type="string" />
+      <ns0:attribute id="57" title="rf_violence_against_pets_value" type="double" />
+      <ns0:attribute id="58" title="rf_violence_against_pets_observed" type="double" />
+      <ns0:attribute id="59" title="rf_violence_against_pets_stage" type="string" />
+      <ns0:attribute id="60" title="rf_assault_while_pregnant_value" type="double" />
+      <ns0:attribute id="61" title="rf_assault_while_pregnant_observed" type="double" />
+      <ns0:attribute id="62" title="rf_assault_while_pregnant_stage" type="string" />
+      <ns0:attribute id="63" title="rf_criminal_history_value" type="double" />
+      <ns0:attribute id="64" title="rf_criminal_history_observed" type="double" />
+      <ns0:attribute id="65" title="rf_criminal_history_stage" type="string" />
+      <ns0:attribute id="66" title="rf_history_abuse_as_victim_value" type="double" />
+      <ns0:attribute id="67" title="rf_history_abuse_as_victim_observed" type="double" />
+      <ns0:attribute id="68" title="rf_history_abuse_as_victim_stage" type="string" />
+      <ns0:attribute id="69" title="rf_threatened_harmed_children_value" type="double" />
+      <ns0:attribute id="70" title="rf_threatened_harmed_children_observed" type="double" />
+      <ns0:attribute id="71" title="rf_threatened_harmed_children_stage" type="string" />
+      <ns0:attribute id="72" title="mental_health" type="string" />
+      <ns0:attribute id="73" title="residency_status" type="string" />
+      <ns0:attribute id="74" title="race_ethnicity" type="string" />
+      <ns0:attribute id="75" title="rf_considered_vulnerable_value" type="double" />
+      <ns0:attribute id="76" title="rf_considered_vulnerable_observed" type="double" />
+      <ns0:attribute id="77" title="rf_considered_vulnerable_stage" type="string" />
+      <ns0:attribute id="78" title="rf_pregnant_value" type="double" />
+      <ns0:attribute id="79" title="rf_pregnant_observed" type="double" />
+      <ns0:attribute id="80" title="rf_pregnant_stage" type="string" />
+      <ns0:attribute id="81" title="rf_disability_value" type="double" />
+      <ns0:attribute id="82" title="rf_disability_observed" type="double" />
+      <ns0:attribute id="83" title="rf_disability_stage" type="string" />
+      <ns0:attribute id="84" title="rf_reported_to_authorities_value" type="double" />
+      <ns0:attribute id="85" title="rf_reported_to_authorities_observed" type="double" />
+      <ns0:attribute id="86" title="rf_reported_to_authorities_stage" type="string" />
+      <ns0:attribute id="87" title="rf_womens_shelter_value" type="double" />
+      <ns0:attribute id="88" title="rf_womens_shelter_observed" type="double" />
+      <ns0:attribute id="89" title="rf_womens_shelter_stage" type="string" />
+      <ns0:attribute id="90" title="rf_risk_assessment_made_value" type="double" />
+      <ns0:attribute id="91" title="rf_risk_assessment_made_observed" type="double" />
+      <ns0:attribute id="92" title="rf_risk_assessment_made_stage" type="string" />
+      <ns0:attribute id="93" title="rf_history_abuse_as_offender_value" type="double" />
+      <ns0:attribute id="94" title="rf_history_abuse_as_offender_observed" type="double" />
+      <ns0:attribute id="95" title="rf_history_abuse_as_offender_stage" type="string" />
+    </ns0:attributes>
+    <ns0:nodes>
+      <ns0:node id="CASE_0100-73241-00495-20" label="0100-73241-00495-20">
+        <ns0:attvalues>
+          <ns0:attvalue for="0" value="CASE_0100-73241-00495-20" />
+          <ns0:attvalue for="1" value="case" />
+          <ns0:attvalue for="2" value="2019-01-10 00:00:00" />
+          <ns0:attvalue for="3" value="2022-04-26 00:00:00" />
+          <ns0:attvalue for="4" value="Yes" />
+          <ns0:attvalue for="5" value="Family" />
+          <ns0:attvalue for="6" value="S-532-21" />
+          <ns0:attvalue for="7" value="No" />
+          <ns0:attvalue for="8" value="Partner" />
+          <ns0:attvalue for="9" value="Yes" />
+        </ns0:attvalues>
+      </ns0:node>
+      <ns0:node id="PERSON_0100-73241-00495-20_O" label="Offender">
+        <ns0:attvalues>
+          <ns0:attvalue for="0" value="PERSON_0100-73241-00495-20_O" />
+          <ns0:attvalue for="1" value="person" />
+          <ns0:attvalue for="10" value="offender" />
+          <ns0:attvalue for="11" value="52" />
+          <ns0:attvalue for="12" value="Cisgender man" />
+          <ns0:attvalue for="13" value="Unkown" />
+          <ns0:attvalue for="14" value="Married" />
+          <ns0:attvalue for="15" value="1.0" />
+          <ns0:attvalue for="16" value="1.0" />
+          <ns0:attvalue for="17" value="prior" />
+          <ns0:attvalue for="18" value="1.0" />
+          <ns0:attvalue for="19" value="1.0" />
+          <ns0:attvalue for="20" value="prior" />
+          <ns0:attvalue for="21" value="1.0" />
+          <ns0:attvalue for="22" value="1.0" />
+          <ns0:attvalue for="23" value="prior" />
+          <ns0:attvalue for="24" value="1.0" />
+          <ns0:attvalue for="25" value="1.0" />
+          <ns0:attvalue for="26" value="prior" />
+          <ns0:attvalue for="27" value="0.0" />
+          <ns0:attvalue for="28" value="1.0" />
+          <ns0:attvalue for="29" value="prior" />
+          <ns0:attvalue for="30" value="0.5" />
+          <ns0:attvalue for="31" value="0.0" />
+          <ns0:attvalue for="32" value="prior" />
+          <ns0:attvalue for="33" value="1.0" />
+          <ns0:attvalue for="34" value="1.0" />
+          <ns0:attvalue for="35" value="prior" />
+          <ns0:attvalue for="36" value="1.0" />
+          <ns0:attvalue for="37" value="1.0" />
+          <ns0:attvalue for="38" value="prior" />
+          <ns0:attvalue for="39" value="0.5" />
+          <ns0:attvalue for="40" value="0.0" />
+          <ns0:attvalue for="41" value="prior" />
+          <ns0:attvalue for="42" value="1.0" />
+          <ns0:attvalue for="43" value="1.0" />
+          <ns0:attvalue for="44" value="prior" />
+          <ns0:attvalue for="45" value="0.0" />
+          <ns0:attvalue for="46" value="1.0" />
+          <ns0:attvalue for="47" value="prior" />
+          <ns0:attvalue for="48" value="1.0" />
+          <ns0:attvalue for="49" value="1.0" />
+          <ns0:attvalue for="50" value="prior" />
+          <ns0:attvalue for="51" value="1.0" />
+          <ns0:attvalue for="52" value="1.0" />
+          <ns0:attvalue for="53" value="prior" />
+          <ns0:attvalue for="54" value="1.0" />
+          <ns0:attvalue for="55" value="1.0" />
+          <ns0:attvalue for="56" value="prior" />
+          <ns0:attvalue for="57" value="0.5" />
+          <ns0:attvalue for="58" value="0.0" />
+          <ns0:attvalue for="59" value="prior" />
+          <ns0:attvalue for="60" value="1.0" />
+          <ns0:attvalue for="61" value="1.0" />
+          <ns0:attvalue for="62" value="prior" />
+          <ns0:attvalue for="63" value="1.0" />
+          <ns0:attvalue for="64" value="1.0" />
+          <ns0:attvalue for="65" value="prior" />
+          <ns0:attvalue for="66" value="0.0" />
+          <ns0:attvalue for="67" value="1.0" />
+          <ns0:attvalue for="68" value="prior" />
+          <ns0:attvalue for="69" value="1.0" />
+          <ns0:attvalue for="70" value="1.0" />
+          <ns0:attvalue for="71" value="prior" />
+        </ns0:attvalues>
+      </ns0:node>
+      <ns0:node id="PERSON_0100-73241-00495-20_V" label="Victim">
+        <ns0:attvalues>
+          <ns0:attvalue for="0" value="PERSON_0100-73241-00495-20_V" />
+          <ns0:attvalue for="1" value="person" />
+          <ns0:attvalue for="10" value="victim" />
+          <ns0:attvalue for="11" value="42" />
+          <ns0:attvalue for="12" value="Cisgender woman" />
+          <ns0:attvalue for="14" value="Married" />
+          <ns0:attvalue for="63" value="0.0" />
+          <ns0:attvalue for="64" value="1.0" />
+          <ns0:attvalue for="65" value="prior" />
+          <ns0:attvalue for="66" value="1.0" />
+          <ns0:attvalue for="67" value="1.0" />
+          <ns0:attvalue for="68" value="prior" />
+          <ns0:attvalue for="72" value="No issues reported" />
+          <ns0:attvalue for="73" value="Temporary citizenship" />
+          <ns0:attvalue for="74" value="Pakistan" />
+          <ns0:attvalue for="75" value="1.0" />
+          <ns0:attvalue for="76" value="1.0" />
+          <ns0:attvalue for="77" value="prior" />
+          <ns0:attvalue for="78" value="0.0" />
+          <ns0:attvalue for="79" value="1.0" />
+          <ns0:attvalue for="80" value="prior" />
+          <ns0:attvalue for="81" value="0.5" />
+          <ns0:attvalue for="82" value="0.0" />
+          <ns0:attvalue for="83" value="prior" />
+          <ns0:attvalue for="84" value="1.0" />
+          <ns0:attvalue for="85" value="1.0" />
+          <ns0:attvalue for="86" value="prior" />
+          <ns0:attvalue for="87" value="1.0" />
+          <ns0:attvalue for="88" value="1.0" />
+          <ns0:attvalue for="89" value="prior" />
+          <ns0:attvalue for="90" value="1.0" />
+          <ns0:attvalue for="91" value="1.0" />
+          <ns0:attvalue for="92" value="prior" />
+          <ns0:attvalue for="93" value="0.0" />
+          <ns0:attvalue for="94" value="1.0" />
+          <ns0:attvalue for="95" value="prior" />
+        </ns0:attvalues>
+      </ns0:node>
+      <ns0:node id="PERSON_0100-73241-00495-20_CHILD_1" label="Child 1 (shared)">
+        <ns0:attvalues>
+          <ns0:attvalue for="0" value="PERSON_0100-73241-00495-20_CHILD_1" />
+          <ns0:attvalue for="1" value="person" />
+          <ns0:attvalue for="10" value="child" />
+        </ns0:attvalues>
+      </ns0:node>
+      <ns0:node id="PERSON_0100-73241-00495-20_CHILD_2" label="Child 2 (shared)">
+        <ns0:attvalues>
+          <ns0:attvalue for="0" value="PERSON_0100-73241-00495-20_CHILD_2" />
+          <ns0:attvalue for="1" value="person" />
+          <ns0:attvalue for="10" value="child" />
+        </ns0:attvalues>
+      </ns0:node>
+      <ns0:node id="PERSON_0100-73241-00495-20_CHILD_3" label="Child 3 (shared)">
+        <ns0:attvalues>
+          <ns0:attvalue for="0" value="PERSON_0100-73241-00495-20_CHILD_3" />
+          <ns0:attvalue for="1" value="person" />
+          <ns0:attvalue for="10" value="child" />
+        </ns0:attvalues>
+      </ns0:node>
+    </ns0:nodes>
+    <ns0:edges>
+      <ns0:edge source="CASE_0100-73241-00495-20" target="PERSON_0100-73241-00495-20_O" id="0" weight="1.0">
+        <ns0:attvalues>
+          <ns0:attvalue for="96" value="E_e20881fe2373bbfa" />
+          <ns0:attvalue for="97" value="HAS_PARTICIPANT" />
+          <ns0:attvalue for="98" value="HAS_PARTICIPANT" />
+          <ns0:attvalue for="99" value="offender" />
+          <ns0:attvalue for="100" value="case" />
+          <ns0:attvalue for="101" value="0" />
+        </ns0:attvalues>
+      </ns0:edge>
+      <ns0:edge source="CASE_0100-73241-00495-20" target="PERSON_0100-73241-00495-20_V" id="1" weight="1.0">
+        <ns0:attvalues>
+          <ns0:attvalue for="96" value="E_c057b1a30128817e" />
+          <ns0:attvalue for="97" value="HAS_PARTICIPANT" />
+          <ns0:attvalue for="98" value="HAS_PARTICIPANT" />
+          <ns0:attvalue for="99" value="victim" />
+          <ns0:attvalue for="100" value="case" />
+          <ns0:attvalue for="101" value="0" />
+        </ns0:attvalues>
+      </ns0:edge>
+      <ns0:edge source="CASE_0100-73241-00495-20" target="PERSON_0100-73241-00495-20_CHILD_1" id="2" weight="1.0">
+        <ns0:attvalues>
+          <ns0:attvalue for="96" value="E_77e779b9ac182a9b" />
+          <ns0:attvalue for="97" value="HAS_PARTICIPANT" />
+          <ns0:attvalue for="98" value="HAS_PARTICIPANT" />
+          <ns0:attvalue for="99" value="child" />
+          <ns0:attvalue for="100" value="case" />
+          <ns0:attvalue for="101" value="0" />
+        </ns0:attvalues>
+      </ns0:edge>
+      <ns0:edge source="CASE_0100-73241-00495-20" target="PERSON_0100-73241-00495-20_CHILD_2" id="3" weight="1.0">
+        <ns0:attvalues>
+          <ns0:attvalue for="96" value="E_28744373296f6b78" />
+          <ns0:attvalue for="97" value="HAS_PARTICIPANT" />
+          <ns0:attvalue for="98" value="HAS_PARTICIPANT" />
+          <ns0:attvalue for="99" value="child" />
+          <ns0:attvalue for="100" value="case" />
+          <ns0:attvalue for="101" value="0" />
+        </ns0:attvalues>
+      </ns0:edge>
+      <ns0:edge source="CASE_0100-73241-00495-20" target="PERSON_0100-73241-00495-20_CHILD_3" id="4" weight="1.0">
+        <ns0:attvalues>
+          <ns0:attvalue for="96" value="E_ab0702bb3dbc3345" />
+          <ns0:attvalue for="97" value="HAS_PARTICIPANT" />
+          <ns0:attvalue for="98" value="HAS_PARTICIPANT" />
+          <ns0:attvalue for="99" value="child" />
+          <ns0:attvalue for="100" value="case" />
+          <ns0:attvalue for="101" value="0" />
+        </ns0:attvalues>
+      </ns0:edge>
+      <ns0:edge source="PERSON_0100-73241-00495-20_O" target="PERSON_0100-73241-00495-20_V" id="5" weight="1.0">
+        <ns0:attvalues>
+          <ns0:attvalue for="96" value="E_2d37f8d121a908ae" />
+          <ns0:attvalue for="97" value="CHILD_CUSTODY_DISPUTE" />
+          <ns0:attvalue for="98" value="CHILD_CUSTODY_DISPUTE" />
+          <ns0:attvalue for="100" value="case" />
+          <ns0:attvalue for="102" value="prior" />
+          <ns0:attvalue for="103" value="1" />
+          <ns0:attvalue for="104" value="1" />
+          <ns0:attvalue for="101" value="0" />
+        </ns0:attvalues>
+      </ns0:edge>
+      <ns0:edge source="PERSON_0100-73241-00495-20_O" target="PERSON_0100-73241-00495-20_V" id="6" weight="1.0">
+        <ns0:attvalues>
+          <ns0:attvalue for="96" value="E_71c9972cb80bc120" />
+          <ns0:attvalue for="97" value="SHARED_CHILDREN" />
+          <ns0:attvalue for="98" value="SHARED_CHILDREN" />
+          <ns0:attvalue for="100" value="case" />
+          <ns0:attvalue for="102" value="prior" />
+          <ns0:attvalue for="103" value="1" />
+          <ns0:attvalue for="104" value="1" />
+          <ns0:attvalue for="105" value="3" />
+          <ns0:attvalue for="101" value="1" />
+        </ns0:attvalues>
+      </ns0:edge>
+      <ns0:edge source="PERSON_0100-73241-00495-20_O" target="PERSON_0100-73241-00495-20_V" id="7" weight="1.0">
+        <ns0:attvalues>
+          <ns0:attvalue for="96" value="E_a68bef31dcbcda38" />
+          <ns0:attvalue for="97" value="PRIOR_FAMILY_COURT_INVOLVEMENT" />
+          <ns0:attvalue for="98" value="PRIOR_FAMILY_COURT_INVOLVEMENT" />
+          <ns0:attvalue for="100" value="case" />
+          <ns0:attvalue for="102" value="prior" />
+          <ns0:attvalue for="103" value="1" />
+          <ns0:attvalue for="104" value="1" />
+          <ns0:attvalue for="101" value="2" />
+        </ns0:attvalues>
+      </ns0:edge>
+      <ns0:edge source="PERSON_0100-73241-00495-20_O" target="PERSON_0100-73241-00495-20_V" id="8" weight="1.0">
+        <ns0:attvalues>
+          <ns0:attvalue for="96" value="E_c8f8d8dcbf6233d8" />
+          <ns0:attvalue for="97" value="PRIOR_VIOLENCE" />
+          <ns0:attvalue for="98" value="PRIOR_VIOLENCE" />
+          <ns0:attvalue for="100" value="case" />
+          <ns0:attvalue for="102" value="prior" />
+          <ns0:attvalue for="103" value="1" />
+          <ns0:attvalue for="104" value="1" />
+          <ns0:attvalue for="106" value="prior_violence" />
+          <ns0:attvalue for="107" value="Sexual, physical" />
+          <ns0:attvalue for="101" value="3" />
+        </ns0:attvalues>
+      </ns0:edge>
+      <ns0:edge source="PERSON_0100-73241-00495-20_O" target="PERSON_0100-73241-00495-20_V" id="9" weight="1.0">
+        <ns0:attvalues>
+          <ns0:attvalue for="96" value="E_9bf752ae80c3aba8" />
+          <ns0:attvalue for="97" value="COERCIVE_CONTROL" />
+          <ns0:attvalue for="98" value="COERCIVE_CONTROL" />
+          <ns0:attvalue for="100" value="case" />
+          <ns0:attvalue for="102" value="prior" />
+          <ns0:attvalue for="103" value="1" />
+          <ns0:attvalue for="104" value="1" />
+          <ns0:attvalue for="106" value="control" />
+          <ns0:attvalue for="101" value="4" />
+        </ns0:attvalues>
+      </ns0:edge>
+      <ns0:edge source="PERSON_0100-73241-00495-20_O" target="PERSON_0100-73241-00495-20_V" id="10" weight="1.0">
+        <ns0:attvalues>
+          <ns0:attvalue for="96" value="E_fa0206d367de43f5" />
+          <ns0:attvalue for="97" value="ATTEMPTED_ISOLATION" />
+          <ns0:attvalue for="98" value="ATTEMPTED_ISOLATION" />
+          <ns0:attvalue for="100" value="case" />
+          <ns0:attvalue for="102" value="prior" />
+          <ns0:attvalue for="103" value="1" />
+          <ns0:attvalue for="104" value="1" />
+          <ns0:attvalue for="106" value="prior_attempts_isolate_victim" />
+          <ns0:attvalue for="101" value="5" />
+        </ns0:attvalues>
+      </ns0:edge>
+      <ns0:edge source="PERSON_0100-73241-00495-20_O" target="PERSON_0100-73241-00495-20_V" id="11" weight="1.0">
+        <ns0:attvalues>
+          <ns0:attvalue for="96" value="E_78936de7396ded6a" />
+          <ns0:attvalue for="97" value="PRIOR_STRANGULATION" />
+          <ns0:attvalue for="98" value="PRIOR_STRANGULATION" />
+          <ns0:attvalue for="100" value="case" />
+          <ns0:attvalue for="102" value="prior" />
+          <ns0:attvalue for="103" value="1" />
+          <ns0:attvalue for="104" value="1" />
+          <ns0:attvalue for="106" value="prior_strangulation" />
+          <ns0:attvalue for="101" value="6" />
+        </ns0:attvalues>
+      </ns0:edge>
+      <ns0:edge source="PERSON_0100-73241-00495-20_O" target="PERSON_0100-73241-00495-20_V" id="12" weight="1.0">
+        <ns0:attvalues>
+          <ns0:attvalue for="96" value="E_bf9a2873f692d570" />
+          <ns0:attvalue for="97" value="THREATENED_WITH_WEAPON" />
+          <ns0:attvalue for="98" value="THREATENED_WITH_WEAPON" />
+          <ns0:attvalue for="100" value="case" />
+          <ns0:attvalue for="102" value="prior" />
+          <ns0:attvalue for="103" value="1" />
+          <ns0:attvalue for="104" value="1" />
+          <ns0:attvalue for="106" value="prior_threats_with_weapon" />
+          <ns0:attvalue for="101" value="7" />
+        </ns0:attvalues>
+      </ns0:edge>
+      <ns0:edge source="PERSON_0100-73241-00495-20_O" target="PERSON_0100-73241-00495-20_V" id="13" weight="1.0">
+        <ns0:attvalues>
+          <ns0:attvalue for="96" value="E_bd3bb9a2edada48b" />
+          <ns0:attvalue for="97" value="ASSAULTED_WITH_WEAPON" />
+          <ns0:attvalue for="98" value="ASSAULTED_WITH_WEAPON" />
+          <ns0:attvalue for="100" value="case" />
+          <ns0:attvalue for="102" value="prior" />
+          <ns0:attvalue for="103" value="1" />
+          <ns0:attvalue for="104" value="1" />
+          <ns0:attvalue for="106" value="prior_assault_with_weapon" />
+          <ns0:attvalue for="101" value="8" />
+        </ns0:attvalues>
+      </ns0:edge>
+      <ns0:edge source="PERSON_0100-73241-00495-20_O" target="PERSON_0100-73241-00495-20_V" id="14" weight="1.0">
+        <ns0:attvalues>
+          <ns0:attvalue for="96" value="E_0e1f3ff44f2b9378" />
+          <ns0:attvalue for="97" value="ESCALATED_VIOLENCE" />
+          <ns0:attvalue for="98" value="ESCALATED_VIOLENCE" />
+          <ns0:attvalue for="100" value="case" />
+          <ns0:attvalue for="102" value="prior" />
+          <ns0:attvalue for="103" value="1" />
+          <ns0:attvalue for="104" value="1" />
+          <ns0:attvalue for="106" value="escalation_of_violence" />
+          <ns0:attvalue for="101" value="9" />
+        </ns0:attvalues>
+      </ns0:edge>
+      <ns0:edge source="PERSON_0100-73241-00495-20_O" target="PERSON_0100-73241-00495-20_V" id="15" weight="1.0">
+        <ns0:attvalues>
+          <ns0:attvalue for="96" value="E_c988ef6eaaa83659" />
+          <ns0:attvalue for="97" value="STALKED" />
+          <ns0:attvalue for="98" value="STALKED" />
+          <ns0:attvalue for="100" value="case" />
+          <ns0:attvalue for="102" value="prior" />
+          <ns0:attvalue for="103" value="1" />
+          <ns0:attvalue for="104" value="1" />
+          <ns0:attvalue for="106" value="obsessive_behaviour" />
+          <ns0:attvalue for="101" value="10" />
+        </ns0:attvalues>
+      </ns0:edge>
+      <ns0:edge source="PERSON_0100-73241-00495-20_O" target="PERSON_0100-73241-00495-20_V" id="16" weight="1.0">
+        <ns0:attvalues>
+          <ns0:attvalue for="96" value="E_cead90160448abc0" />
+          <ns0:attvalue for="97" value="SEXUAL_JEALOUSY" />
+          <ns0:attvalue for="98" value="SEXUAL_JEALOUSY" />
+          <ns0:attvalue for="100" value="case" />
+          <ns0:attvalue for="102" value="prior" />
+          <ns0:attvalue for="103" value="1" />
+          <ns0:attvalue for="104" value="1" />
+          <ns0:attvalue for="106" value="sexual_jealousy" />
+          <ns0:attvalue for="101" value="11" />
+        </ns0:attvalues>
+      </ns0:edge>
+      <ns0:edge source="PERSON_0100-73241-00495-20_O" target="PERSON_0100-73241-00495-20_V" id="17" weight="1.0">
+        <ns0:attvalues>
+          <ns0:attvalue for="96" value="E_4fcd4cb7fd38b211" />
+          <ns0:attvalue for="97" value="MISOGYNISTIC_ATTITUDES" />
+          <ns0:attvalue for="98" value="MISOGYNISTIC_ATTITUDES" />
+          <ns0:attvalue for="100" value="case" />
+          <ns0:attvalue for="102" value="prior" />
+          <ns0:attvalue for="103" value="1" />
+          <ns0:attvalue for="104" value="1" />
+          <ns0:attvalue for="106" value="misogynistic_attitudes" />
+          <ns0:attvalue for="101" value="12" />
+        </ns0:attvalues>
+      </ns0:edge>
+      <ns0:edge source="PERSON_0100-73241-00495-20_O" target="PERSON_0100-73241-00495-20_V" id="18" weight="1.0">
+        <ns0:attvalues>
+          <ns0:attvalue for="96" value="E_84c2da7fdb763074" />
+          <ns0:attvalue for="97" value="CONTROLLED_DAILY_ACTIVITIES" />
+          <ns0:attvalue for="98" value="CONTROLLED_DAILY_ACTIVITIES" />
+          <ns0:attvalue for="100" value="case" />
+          <ns0:attvalue for="102" value="prior" />
+          <ns0:attvalue for="103" value="1" />
+          <ns0:attvalue for="104" value="1" />
+          <ns0:attvalue for="106" value="controlled_victims_daily_activities" />
+          <ns0:attvalue for="101" value="13" />
+        </ns0:attvalues>
+      </ns0:edge>
+      <ns0:edge source="PERSON_0100-73241-00495-20_O" target="PERSON_0100-73241-00495-20_V" id="19" weight="1.0">
+        <ns0:attvalues>
+          <ns0:attvalue for="96" value="E_d03b572efe0bbdac" />
+          <ns0:attvalue for="97" value="THREATENED_SUICIDE" />
+          <ns0:attvalue for="98" value="THREATENED_SUICIDE" />
+          <ns0:attvalue for="100" value="case" />
+          <ns0:attvalue for="102" value="prior" />
+          <ns0:attvalue for="104" value="0" />
+          <ns0:attvalue for="106" value="threats_of_suicide" />
+          <ns0:attvalue for="101" value="14" />
+        </ns0:attvalues>
+      </ns0:edge>
+      <ns0:edge source="PERSON_0100-73241-00495-20_O" target="PERSON_0100-73241-00495-20_V" id="20" weight="1.0">
+        <ns0:attvalues>
+          <ns0:attvalue for="96" value="E_7447cd292289e574" />
+          <ns0:attvalue for="97" value="YOUTH_COUPLE" />
+          <ns0:attvalue for="98" value="YOUTH_COUPLE" />
+          <ns0:attvalue for="100" value="case" />
+          <ns0:attvalue for="102" value="prior" />
+          <ns0:attvalue for="103" value="1" />
+          <ns0:attvalue for="104" value="1" />
+          <ns0:attvalue for="106" value="youth_couple" />
+          <ns0:attvalue for="101" value="15" />
+        </ns0:attvalues>
+      </ns0:edge>
+      <ns0:edge source="PERSON_0100-73241-00495-20_O" target="PERSON_0100-73241-00495-20_CHILD_1" id="21" weight="1.0">
+        <ns0:attvalues>
+          <ns0:attvalue for="96" value="E_e9001edc357b0fd9" />
+          <ns0:attvalue for="97" value="PARENT_OF" />
+          <ns0:attvalue for="98" value="PARENT_OF" />
+          <ns0:attvalue for="100" value="case" />
+          <ns0:attvalue for="101" value="0" />
+        </ns0:attvalues>
+      </ns0:edge>
+      <ns0:edge source="PERSON_0100-73241-00495-20_O" target="PERSON_0100-73241-00495-20_CHILD_1" id="22" weight="1.0">
+        <ns0:attvalues>
+          <ns0:attvalue for="96" value="E_1f7adc571295afab" />
+          <ns0:attvalue for="97" value="THREATENED_HARMED_CHILD" />
+          <ns0:attvalue for="98" value="THREATENED_HARMED_CHILD" />
+          <ns0:attvalue for="100" value="case" />
+          <ns0:attvalue for="102" value="prior" />
+          <ns0:attvalue for="103" value="1" />
+          <ns0:attvalue for="104" value="1" />
+          <ns0:attvalue for="106" value="offender_threatened_harmed_children" />
+          <ns0:attvalue for="101" value="1" />
+        </ns0:attvalues>
+      </ns0:edge>
+      <ns0:edge source="PERSON_0100-73241-00495-20_O" target="PERSON_0100-73241-00495-20_CHILD_2" id="23" weight="1.0">
+        <ns0:attvalues>
+          <ns0:attvalue for="96" value="E_1c82337243423c46" />
+          <ns0:attvalue for="97" value="PARENT_OF" />
+          <ns0:attvalue for="98" value="PARENT_OF" />
+          <ns0:attvalue for="100" value="case" />
+          <ns0:attvalue for="101" value="0" />
+        </ns0:attvalues>
+      </ns0:edge>
+      <ns0:edge source="PERSON_0100-73241-00495-20_O" target="PERSON_0100-73241-00495-20_CHILD_2" id="24" weight="1.0">
+        <ns0:attvalues>
+          <ns0:attvalue for="96" value="E_6c75fab83894f30b" />
+          <ns0:attvalue for="97" value="THREATENED_HARMED_CHILD" />
+          <ns0:attvalue for="98" value="THREATENED_HARMED_CHILD" />
+          <ns0:attvalue for="100" value="case" />
+          <ns0:attvalue for="102" value="prior" />
+          <ns0:attvalue for="103" value="1" />
+          <ns0:attvalue for="104" value="1" />
+          <ns0:attvalue for="106" value="offender_threatened_harmed_children" />
+          <ns0:attvalue for="101" value="1" />
+        </ns0:attvalues>
+      </ns0:edge>
+      <ns0:edge source="PERSON_0100-73241-00495-20_O" target="PERSON_0100-73241-00495-20_CHILD_3" id="25" weight="1.0">
+        <ns0:attvalues>
+          <ns0:attvalue for="96" value="E_a448e25412d7a1ac" />
+          <ns0:attvalue for="97" value="PARENT_OF" />
+          <ns0:attvalue for="98" value="PARENT_OF" />
+          <ns0:attvalue for="100" value="case" />
+          <ns0:attvalue for="101" value="0" />
+        </ns0:attvalues>
+      </ns0:edge>
+      <ns0:edge source="PERSON_0100-73241-00495-20_O" target="PERSON_0100-73241-00495-20_CHILD_3" id="26" weight="1.0">
+        <ns0:attvalues>
+          <ns0:attvalue for="96" value="E_f3c6b94fb02d86d2" />
+          <ns0:attvalue for="97" value="THREATENED_HARMED_CHILD" />
+          <ns0:attvalue for="98" value="THREATENED_HARMED_CHILD" />
+          <ns0:attvalue for="100" value="case" />
+          <ns0:attvalue for="102" value="prior" />
+          <ns0:attvalue for="103" value="1" />
+          <ns0:attvalue for="104" value="1" />
+          <ns0:attvalue for="106" value="offender_threatened_harmed_children" />
+          <ns0:attvalue for="101" value="1" />
+        </ns0:attvalues>
+      </ns0:edge>
+      <ns0:edge source="PERSON_0100-73241-00495-20_V" target="PERSON_0100-73241-00495-20_O" id="27" weight="1.0">
+        <ns0:attvalues>
+          <ns0:attvalue for="96" value="E_19685e4935c69aec" />
+          <ns0:attvalue for="97" value="SEPARATED_FROM" />
+          <ns0:attvalue for="98" value="SEPARATED_FROM" />
+          <ns0:attvalue for="100" value="case" />
+          <ns0:attvalue for="102" value="prior" />
+          <ns0:attvalue for="103" value="0" />
+          <ns0:attvalue for="104" value="1" />
+          <ns0:attvalue for="101" value="0" />
+        </ns0:attvalues>
+      </ns0:edge>
+      <ns0:edge source="PERSON_0100-73241-00495-20_V" target="PERSON_0100-73241-00495-20_O" id="28" weight="1.0">
+        <ns0:attvalues>
+          <ns0:attvalue for="96" value="E_86f17d4c0df8d60c" />
+          <ns0:attvalue for="97" value="HAS_NEW_PARTNER" />
+          <ns0:attvalue for="98" value="HAS_NEW_PARTNER" />
+          <ns0:attvalue for="100" value="case" />
+          <ns0:attvalue for="102" value="prior" />
+          <ns0:attvalue for="103" value="0" />
+          <ns0:attvalue for="104" value="1" />
+          <ns0:attvalue for="101" value="1" />
+        </ns0:attvalues>
+      </ns0:edge>
+      <ns0:edge source="PERSON_0100-73241-00495-20_V" target="PERSON_0100-73241-00495-20_O" id="29" weight="1.0">
+        <ns0:attvalues>
+          <ns0:attvalue for="96" value="E_df11cee288a91337" />
+          <ns0:attvalue for="97" value="YOUTH_COUPLE" />
+          <ns0:attvalue for="98" value="YOUTH_COUPLE" />
+          <ns0:attvalue for="100" value="case" />
+          <ns0:attvalue for="102" value="prior" />
+          <ns0:attvalue for="103" value="1" />
+          <ns0:attvalue for="104" value="1" />
+          <ns0:attvalue for="106" value="youth_couple" />
+          <ns0:attvalue for="101" value="2" />
+        </ns0:attvalues>
+      </ns0:edge>
+      <ns0:edge source="PERSON_0100-73241-00495-20_V" target="PERSON_0100-73241-00495-20_CHILD_1" id="30" weight="1.0">
+        <ns0:attvalues>
+          <ns0:attvalue for="96" value="E_43be8d80b5ec798b" />
+          <ns0:attvalue for="97" value="PARENT_OF" />
+          <ns0:attvalue for="98" value="PARENT_OF" />
+          <ns0:attvalue for="100" value="case" />
+          <ns0:attvalue for="101" value="0" />
+        </ns0:attvalues>
+      </ns0:edge>
+      <ns0:edge source="PERSON_0100-73241-00495-20_V" target="PERSON_0100-73241-00495-20_CHILD_2" id="31" weight="1.0">
+        <ns0:attvalues>
+          <ns0:attvalue for="96" value="E_8fb38bc991ae372d" />
+          <ns0:attvalue for="97" value="PARENT_OF" />
+          <ns0:attvalue for="98" value="PARENT_OF" />
+          <ns0:attvalue for="100" value="case" />
+          <ns0:attvalue for="101" value="0" />
+        </ns0:attvalues>
+      </ns0:edge>
+      <ns0:edge source="PERSON_0100-73241-00495-20_V" target="PERSON_0100-73241-00495-20_CHILD_3" id="32" weight="1.0">
+        <ns0:attvalues>
+          <ns0:attvalue for="96" value="E_ccf9794bad80ee79" />
+          <ns0:attvalue for="97" value="PARENT_OF" />
+          <ns0:attvalue for="98" value="PARENT_OF" />
+          <ns0:attvalue for="100" value="case" />
+          <ns0:attvalue for="101" value="0" />
+        </ns0:attvalues>
+      </ns0:edge>
+    </ns0:edges>
+  </ns0:graph>
+</ns0:gexf>

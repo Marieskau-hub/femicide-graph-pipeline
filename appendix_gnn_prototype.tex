@@ -1,0 +1,243 @@
+% ─────────────────────────────────────────────────────────────────────────────
+% Appendix: GNN Compatibility Prototype — Code Listings
+% ─────────────────────────────────────────────────────────────────────────────
+
+\section{GNN Compatibility Prototype: Code Listings}
+\label{app:gnn-prototype}
+
+This appendix contains the code listings for the GNN compatibility prototype
+described in Section~\ref{sec:method-gnn-prototype}. The pipeline consists of
+three stages: per-case \texttt{HeteroData} construction
+(Listing~\ref{lst:heterodata-code}), structural validation
+(Listing~\ref{lst:validation-code}), and the GraphSAGE forward pass
+(Listing~\ref{lst:forwardpass-code}).
+
+The pipeline is implemented in \texttt{build\_corpus\_v7.py} and
+\texttt{build\_heterodata\_v7.py}, using Python~3.9, PyTorch~2.x, and
+PyTorch Geometric~2.x. Running \texttt{build\_corpus\_v7.py} on
+the FDO produces the following output:
+
+\begin{verbatim}
+Loaded 28 rows from Stat_FW.xlsx
+Extracted 28 cases  (0 skipped)
+
+Corpus-wide feature dimensions:
+  offender : 39  (19 rf_* keys x 2  +  1 age)
+  victim   : 19  (9 rf_* keys x 2  +  1 age)
+
+Built 28 valid HeteroData objects  (0 failed validation)
+
+Corpus statistics (28 cases):
+  Nodes / graph : min=3  max=8  mean=5.0
+  Edges / graph : min=21  max=31  mean=25.0
+  Node types    : ['offender', 'victim', 'case']
+  Edge types    : 21
+\end{verbatim}
+
+\noindent All 28 cases pass structural validation without modification.
+The four survivor cases from the supplementary dataset are processed
+separately and are not included in this corpus run.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsection*{Listing 1: Per-Case \texttt{HeteroData} Construction}
+
+\texttt{build\_case\_heterodata()} constructs one \texttt{HeteroData} object
+per case. It receives the pre-extracted node attributes and dyadic edge values
+for a single case and produces a self-contained graph instance ready for use
+with a PyTorch Geometric \texttt{DataLoader}. Feature vector dimensions are
+fixed corpus-wide because \texttt{offender\_rf\_keys} and
+\texttt{victim\_rf\_keys} are fitted across all cases before this function
+is called (P8). The \texttt{label} parameter is not set in the current
+corpus; outcome labels must be attached from the FDO's outcome
+columns before any training run, to prevent target leakage (P4).
+
+\begin{lstlisting}[
+    language=Python,
+    caption={Per-case \texttt{HeteroData} construction
+             (\texttt{build\_corpus\_v7.py}).},
+    label={lst:heterodata-code},
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny,
+    keywordstyle=\bfseries,
+    commentstyle=\itshape\color{gray}
+]
+def build_case_heterodata(
+    case_id, offender_attrs, victim_attrs, case_attrs,
+    child_count, dyadic, offender_rf_keys, victim_rf_keys,
+    label=None,
+) -> HeteroData:
+    hd = HeteroData()
+
+    # Feature vectors: age normalised to [0,1], then rf_* pairs (value, observed)
+    # offender dim = 39  (19 rf_* keys * 2 + 1 age)
+    # victim dim   = 19  (9  rf_* keys * 2 + 1 age)
+    o_vec = [_age_feat(offender_attrs)] + rf_vector(offender_attrs, offender_rf_keys)
+    v_vec = [_age_feat(victim_attrs)]   + rf_vector(victim_attrs,   victim_rf_keys)
+    c_vec = [1.0]   # case anchor
+
+    hd["offender"].x = torch.tensor([o_vec], dtype=torch.float)  # [1, 39]
+    hd["victim"].x   = torch.tensor([v_vec], dtype=torch.float)  # [1, 19]
+    hd["case"].x     = torch.tensor([c_vec], dtype=torch.float)  # [1,  1]
+
+    if label is not None:
+        hd["case"].y = torch.tensor([label], dtype=torch.float)
+
+    # Structural edges: case -> offender / victim
+    hd["case", "has_offender", "offender"].edge_index = torch.tensor(
+        [[0], [0]], dtype=torch.long)
+    hd["case", "has_victim", "victim"].edge_index = torch.tensor(
+        [[0], [0]], dtype=torch.long)
+
+    # Dyadic edges: offender -> victim, one per relation type (P2, P6)
+    # edge_attr = three-state value: 1.0 present / 0.0 absent / 0.5 unknown
+    for etype, val in dyadic.items():
+        rel = etype.lower()
+        hd["offender", rel, "victim"].edge_index = torch.tensor(
+            [[0], [0]], dtype=torch.long)
+        hd["offender", rel, "victim"].edge_attr = torch.tensor(
+            [[val]], dtype=torch.float)
+
+    # Children: one node per child recorded in the case (P2)
+    if child_count > 0:
+        hd["child"].x = torch.ones(child_count, 1, dtype=torch.float)
+        child_idxs  = list(range(child_count))
+        parent_srcs = [0] * child_count
+        hd["offender", "parent_of", "child"].edge_index = torch.tensor(
+            [parent_srcs, child_idxs], dtype=torch.long)
+        hd["child", "present_in", "case"].edge_index = torch.tensor(
+            [child_idxs, [0] * child_count], dtype=torch.long)
+
+    return hd
+\end{lstlisting}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsection*{Listing 2: Structural Validation}
+
+Before a case graph is added to the corpus, \texttt{validate\_case()} checks
+that the three required node types are present and that offender and victim
+each have exactly one node. All 28 cases passed without warnings.
+
+\begin{lstlisting}[
+    language=Python,
+    caption={Structural validation per case (\texttt{build\_corpus\_v7.py}).},
+    label={lst:validation-code},
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny,
+    keywordstyle=\bfseries,
+    commentstyle=\itshape\color{gray}
+]
+def validate_case(hd: HeteroData, case_id: str) -> bool:
+    checks = [
+        ("offender" in hd.node_types,    "Missing offender node"),
+        ("victim"   in hd.node_types,    "Missing victim node"),
+        ("case"     in hd.node_types,    "Missing case node"),
+        (hd["offender"].x.shape[0] == 1, "offender.x must have exactly 1 row"),
+        (hd["victim"].x.shape[0]   == 1, "victim.x must have exactly 1 row"),
+    ]
+    ok = True
+    for passed, msg in checks:
+        if not passed:
+            print(f"  [WARN] {case_id}: {msg}")
+            ok = False
+    return ok
+\end{lstlisting}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\subsection*{Listing 3: GraphSAGE Forward Pass}
+
+Listing~\ref{lst:forwardpass-code} shows the model definition and corpus-level
+forward pass used in the notebook
+\texttt{network\_singlecase\_semantic\_v7-2-3\_gnn-2.ipynb}. The architecture
+separates concerns between two classes. \texttt{GNN} is a two-layer
+\texttt{SAGEConv} module written against the \emph{homogeneous} PyG API
+\texttt{(x,~edge\_index)}; \texttt{to\_hetero()} then expands its weight
+matrices to one copy per edge type (\texttt{aggr="sum"}).
+\texttt{RiskClassifier} wraps the expanded GNN and appends a single shared
+\texttt{nn.Linear} readout head that maps the offender node's 16-dimensional
+embedding to a scalar risk score via sigmoid. Keeping the readout
+\emph{outside} \texttt{to\_hetero()} is necessary: if it were placed inside
+\texttt{GNN}, \texttt{to\_hetero()} would replicate it per edge type, which
+is not the intended behaviour. \texttt{T.ToUndirected()} is applied before
+the forward pass so that the \texttt{case} node receives incoming messages;
+without it, the \texttt{case} node has no incoming edges and message passing
+cannot update it. The forward pass is run in inference mode with randomly
+initialised weights across all 28 FDO cases; its purpose is to verify that
+every \texttt{HeteroData} object in the corpus is a valid input to the
+\texttt{to\_hetero()} framework.
+
+\begin{lstlisting}[
+    language=Python,
+    caption={GraphSAGE forward pass
+             (\texttt{network\_singlecase\_semantic\_v7-2-3\_gnn-2.ipynb}).},
+    label={lst:forwardpass-code},
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny,
+    keywordstyle=\bfseries,
+    commentstyle=\itshape\color{gray}
+]
+import torch
+import torch.nn.functional as F
+import torch_geometric.transforms as T
+from torch_geometric.nn import SAGEConv, to_hetero
+
+HIDDEN_DIM = 16   # embedding dimension for each node type
+
+class GNN(torch.nn.Module):
+    """Two-layer GraphSAGE base (homogeneous API).
+    to_hetero() expands conv1/conv2 to one weight copy per edge type."""
+    def __init__(self, hidden_dim):
+        super().__init__()
+        self.conv1 = SAGEConv((-1, -1), hidden_dim)
+        self.conv2 = SAGEConv((-1, -1), hidden_dim)
+
+    def forward(self, x, edge_index):          # homogeneous inputs; to_hetero
+        x = F.relu(self.conv1(x, edge_index))  # dispatches per edge type
+        x = self.conv2(x, edge_index)
+        return x                               # embeddings per node type
+
+
+class RiskClassifier(torch.nn.Module):
+    """Wraps GNN with to_hetero() and adds a per-offender readout head.
+    The Linear classifier is kept outside to_hetero() so it is shared
+    across all edge types rather than replicated."""
+    def __init__(self, hidden_dim, metadata=None):
+        super().__init__()
+        if metadata is None:
+            metadata = data.metadata()
+        self.gnn        = to_hetero(GNN(hidden_dim), metadata, aggr="sum")
+        self.classifier = torch.nn.Linear(hidden_dim, 1)
+
+    def forward(self, x_dict, edge_index_dict):
+        embeddings   = self.gnn(x_dict, edge_index_dict)
+        offender_emb = embeddings["offender"]   # [1, hidden_dim] per case
+        score = torch.sigmoid(self.classifier(offender_emb))
+        return score, embeddings
+
+
+# Load corpus and apply ToUndirected (required for case node message passing)
+bundle       = torch.load("femicide_corpus_v7.pt")
+data_list    = bundle["data_list"]
+case_ids     = bundle["case_ids"]
+transform    = T.ToUndirected()
+data_list_ud = [transform(hd) for hd in data_list]
+
+model_corpus = RiskClassifier(hidden_dim=HIDDEN_DIM,
+                               metadata=data_list_ud[0].metadata())
+model_corpus.eval()
+
+with torch.no_grad():
+    for hd, cid in zip(data_list_ud, case_ids):
+        score, _ = model_corpus(hd.x_dict, hd.edge_index_dict)
+        print(f"{cid}: y_hat = {score.item():.4f}  (untrained)")
+
+print(f"\n✓ Forward pass succeeded for {len(data_list_ud)} / {len(data_list_ud)} cases")
+\end{lstlisting}

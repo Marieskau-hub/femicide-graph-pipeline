@@ -32,7 +32,7 @@ import torch
 import torch_geometric.transforms as T
 from torch_geometric.data import HeteroData
 
-# ── CONFIG ─────────────────────────────────────────────────────────────────────
+#  CONFIG 
 DATA_PATH   = Path("Stat_FW.xlsx")
 SHEET_IDX   = 0
 OUTPUT_PATH = Path("femicide_heterodata_v7.pt")
@@ -42,9 +42,7 @@ GRAPH_VARIANT = "predictive"   # Always predictive for GNN (P5)
 PLACEHOLDERS = {"not applicable", "none", "unknown", "not known", "n/a", "", "nan"}
 
 
-# ══════════════════════════════════════════════════════════════════════════════
-# 1. HELPER FUNCTIONS (identical to notebook)
-# ══════════════════════════════════════════════════════════════════════════════
+# HELPER FUNCTIONS (same as to notebook)
 
 def norm_str(x):
     if x is None: return None
@@ -79,7 +77,7 @@ def _int_from_maybe(x):
     except: return None
 
 
-# ── Lookup tables (identical to notebook) ─────────────────────────────────────
+#  Lookup tables 
 
 FACTOR_CANON = {
     "prior_suicide_attempt":    "suicide_attempt_prior",
@@ -90,7 +88,8 @@ FACTOR_CANON = {
 }
 
 FACTOR_STAGE_DEFAULT = {
-    "offender_suicide": "post",
+    "offender_suicide":         "post",
+    "offender_suicide_attempt": "during",   # schema-level: this is a during-stage factor
 }
 
 DYADIC_BEHAVIOR_MAP = {
@@ -137,9 +136,9 @@ FACTOR_AS_ATTR_COLS = [
     "victim_considered_vulnerable",
     "victim_pregnant",
     "victim_disability",
-    "victim_reported_to_authorities",
-    "victim_womens_shelter",
-    "victim_risk_assessment_made",
+    "reported_to_authorities",
+    "womens_shelter",
+    "risk_assessment_made",
     "victim_criminal_history",
     "victim_history_abuse_as_victim",
     "victim_history_abuse_as_offender",
@@ -169,9 +168,9 @@ RISK_HOLDER_MAP = {
     "victim_considered_vulnerable":               "victim",
     "victim_pregnant":                            "victim",
     "victim_disability":                          "victim",
-    "victim_reported_to_authorities":             "victim",
-    "victim_womens_shelter":                      "victim",
-    "victim_risk_assessment_made":                "victim",
+    "reported_to_authorities":                    "victim",
+    "womens_shelter":                             "victim",
+    "risk_assessment_made":                       "victim",
     "victim_criminal_history":                    "victim",
     "victim_history_abuse_as_victim":             "victim",
     "victim_history_abuse_as_offender":           "victim",
@@ -188,17 +187,19 @@ def canonical_factor_key(col):
 
 
 def infer_stage(raw, col):
+    # Explicit schema-level overrides take precedence over data-dependent
+    # text parsing — otherwise the stage of a column can flip between cases
+    # depending on what the case coder wrote in the cell, which breaks the
+    # P8 invariant of stable feature-vector dimensions.
+    if col in FACTOR_STAGE_DEFAULT: return FACTOR_STAGE_DEFAULT[col]
     st = parse_stage_text(raw)
     if st: return st
-    if col in FACTOR_STAGE_DEFAULT: return FACTOR_STAGE_DEFAULT[col]
     if col.startswith("prior_") or "history" in col: return "prior"
     if "suicide_attempt" in col and col.startswith("offender_"): return "during"
     return "prior"
 
 
-# ══════════════════════════════════════════════════════════════════════════════
-# 2. PER-CASE DATA EXTRACTION
-# ══════════════════════════════════════════════════════════════════════════════
+# PER-CASE DATA EXTRACTION
 
 def build_case_data(row):
     """
@@ -210,7 +211,7 @@ def build_case_data(row):
     victim_attrs   = {"role": "victim"}
     case_attrs     = {}
 
-    # ── Person attributes ──
+    #  Person attributes 
     for k in ["age", "gender", "mental_health", "nationality",
               "employment", "education", "marital_status", "disability"]:
         v = norm_str(row.get(f"offender_{k}"))
@@ -223,7 +224,7 @@ def build_case_data(row):
         v = norm_str(row.get(k))
         if v: case_attrs[k] = v
 
-    # ── Risk factors as rf_* attrs (P9) ──
+    #  Risk factors as rf_* attrs (P9) 
     for col in FACTOR_AS_ATTR_COLS:
         b     = parse_bool(row.get(col))
         fkey  = canonical_factor_key(col)
@@ -248,7 +249,7 @@ def build_case_data(row):
             attrs[f"rf_{fkey}_observed"] = 0.0
         attrs[f"rf_{fkey}_stage"] = stage
 
-    # THC — always set on offender
+    # THC : always set on offender
     thc_b  = parse_bool(row.get("offender_threatened_harmed_children"))
     fkey   = canonical_factor_key("offender_threatened_harmed_children")
     if thc_b is True:
@@ -259,7 +260,7 @@ def build_case_data(row):
         offender_attrs[f"rf_{fkey}_value"] = 0.5; offender_attrs[f"rf_{fkey}_observed"] = 0.0
     offender_attrs[f"rf_{fkey}_stage"] = "prior"
 
-    # ── Dyadic edges ──
+    #  Dyadic edges 
     def ts_float(b):
         if b is True: return 1.0
         if b is False: return 0.0
@@ -280,7 +281,7 @@ def build_case_data(row):
         dyadic[etype] = ts_float(parse_bool(row.get(col)))
     dyadic["THREATENED_HARMED_CHILD"] = ts_float(thc_b)
 
-    # ── Children ──
+    #  Children 
     victim_n   = _int_from_maybe(row.get("number_of_victim_children"))   if parse_bool(row.get("victim_children"))   is True else 0
     offender_n = _int_from_maybe(row.get("number_of_offender_children")) if parse_bool(row.get("offender_children")) is True else 0
     shared_n   = _int_from_maybe(row.get("shared_children_number"))      if parse_bool(row.get("shared_children"))   is True else 0
@@ -294,9 +295,8 @@ def build_case_data(row):
             dyadic)
 
 
-# ══════════════════════════════════════════════════════════════════════════════
-# 3. FEATURE VECTOR HELPERS
-# ══════════════════════════════════════════════════════════════════════════════
+#  FEATURE VECTOR HELPERS
+
 
 def _age_feat(attrs, max_age=100.0):
     raw = attrs.get("age")
@@ -327,9 +327,8 @@ def discover_rf_keys(all_attrs_list, role):
     return sorted(keys)
 
 
-# ══════════════════════════════════════════════════════════════════════════════
+
 # 4. MAIN
-# ══════════════════════════════════════════════════════════════════════════════
 
 if __name__ == "__main__":
     if not DATA_PATH.exists():
@@ -338,7 +337,7 @@ if __name__ == "__main__":
     df = pd.read_excel(DATA_PATH, sheet_name=SHEET_IDX)
     print(f"Loaded {len(df)} cases from {DATA_PATH}")
 
-    # ── Pass 1: extract per-case data ──
+    # Pass 1: extract per-case data 
     all_offender_attrs = []
     all_victim_attrs   = []
     all_case_attrs     = []
@@ -359,13 +358,13 @@ if __name__ == "__main__":
     N = len(case_ids)
     print(f"Processed {N} cases.")
 
-    # ── Discover rf_* keys (consistent across cases) ──
+    #  Discover rf_* keys (consistent across cases) 
     offender_rf_keys = discover_rf_keys(all_offender_attrs, "offender")
     victim_rf_keys   = discover_rf_keys(all_victim_attrs,   "victim")
     print(f"Offender rf_ keys: {len(offender_rf_keys)}  →  vec dim: {1 + len(offender_rf_keys)*2}")
     print(f"Victim rf_ keys:   {len(victim_rf_keys)}  →  vec dim: {1 + len(victim_rf_keys)*2}")
 
-    # ── Pass 2: build feature tensors ──
+    #  Pass 2: build feature tensors 
     offender_feats = []
     victim_feats   = []
     case_feats     = []
@@ -379,22 +378,23 @@ if __name__ == "__main__":
         victim_feats.append(v_vec)
         case_feats.append(c_vec)
 
-    # Risk score: proportion of observed risk factors that are True (offender)
-    risk_scores = []
-    for attrs in all_offender_attrs:
-        vals = [v for k, v in attrs.items()
-                if k.endswith("_value") and k.startswith("rf_")
-                and attrs.get(k.replace("_value", "_observed"), 0) == 1.0]
-        score = float(np.mean(vals)) if vals else 0.5
-        risk_scores.append(score)
+    #  Outcome labels (NOT computed here) 
+    # Graph-level outcome labels (e.g. survived vs killed, femicide subtype)
+    # must come from a column that is NOT derived from the rf_* features —
+    # otherwise the target leaks into the input. The previous implementation
+    # set y to the mean of observed rf_value entries, which is a transformation
+    # of the input features and would produce trivially perfect training
+    # accuracy. y is therefore left unset here; attach it from STAT_FW's
+    # outcome columns (e.g. cause_of_death) downstream when the corpus is
+    # actually used for training.
 
-    # ── Build HeteroData ──
+    #  Build HeteroData 
     data = HeteroData()
 
     data["offender"].x = torch.tensor(offender_feats, dtype=torch.float)
     data["victim"].x   = torch.tensor(victim_feats,   dtype=torch.float)
     data["case"].x     = torch.tensor(case_feats,     dtype=torch.float)
-    data["offender"].y = torch.tensor(risk_scores,    dtype=torch.float).unsqueeze(1)
+    # data["offender"].y left unset — see comment above.
 
     # case → offender / victim structural edges (one per case)
     idx = torch.arange(N, dtype=torch.long)
@@ -436,18 +436,19 @@ if __name__ == "__main__":
     # Add reverse edges for bidirectional message passing
     data = T.ToUndirected()(data)
 
-    # ── Summary ──
+    #  Summary 
     print("\n" + "="*60)
     print("HeteroData corpus:")
     print(data)
     print(f"\nNode types : {data.node_types}")
     print(f"Edge types : {len(data.edge_types)}")
     print(f"\noffender.x : {data['offender'].x.shape}")
-    print(f"offender.y : {data['offender'].y.shape}")
     print(f"victim.x   : {data['victim'].x.shape}")
-    print(f"\nRisk score sample (first 5): {data['offender'].y[:5].squeeze().numpy().round(3)}")
+    print(f"case.x     : {data['case'].x.shape}")
+    print("\nNote: data['offender'].y is intentionally not set in this script.")
+    print("      Attach outcome labels from STAT_FW columns before training.")
 
-    # ── Save ──
+    #  Save 
     bundle = {
         "data":             data,
         "offender_rf_keys": offender_rf_keys,
