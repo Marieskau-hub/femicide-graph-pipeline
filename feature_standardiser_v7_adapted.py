@@ -31,12 +31,12 @@ import numpy as np
 import pandas as pd
 
 
-# ── Constants ──────────────────────────────────────────────────────────────────
+# Constants 
 
 PLACEHOLDERS = {"not applicable", "none", "unknown", "not known", "n/a", "", "nan"}
 
 
-# ── Text normalisation helpers ─────────────────────────────────────────────────
+#  Text normalisation helpers 
 
 def _norm_text(x: Any) -> Optional[str]:
     """Return stripped string, or None for blanks/placeholders."""
@@ -70,7 +70,7 @@ def _to_float(x: Any, default: float = 0.0) -> float:
     return default
 
 
-# ── Three-state encoding ───────────────────────────────────────────────────────
+# Three-state encoding 
 
 def _encode_three_state(name: str, attrs: Dict) -> List[float]:
     """
@@ -92,7 +92,7 @@ def _encode_three_state(name: str, attrs: Dict) -> List[float]:
     return [val_f, obs_f]
 
 
-# ── Schema dataclass ───────────────────────────────────────────────────────────
+# Schema dataclass 
 
 class NodeSchema:
     """Describes how to encode one node type."""
@@ -171,7 +171,7 @@ class NodeSchema:
         return schema
 
 
-# ── Feature Standardiser ───────────────────────────────────────────────────────
+# Feature Standardiser 
 
 class FeatureStandardiser:
     """
@@ -190,7 +190,7 @@ class FeatureStandardiser:
         self._fitted = False
         self._schema_hash: Optional[str] = None
 
-    # ── Schema construction ──────────────────────────────────────────────────
+    # Schema construction 
 
     def _build_base_schemas(self) -> Dict[str, NodeSchema]:
         """Construct base schemas with fixed fields. rf_* fields added during fit()."""
@@ -209,7 +209,7 @@ class FeatureStandardiser:
 
         return schemas
 
-    # ── Fit (Pass 1) ────────────────────────────────────────────────────────
+    # Fit (Pass 1) 
 
     def fit(self, case_graphs: List[Dict]) -> "FeatureStandardiser":
         """
@@ -305,7 +305,7 @@ class FeatureStandardiser:
 
         return self
 
-    # ── Transform (Pass 2) ──────────────────────────────────────────────────
+    # Transform (Pass 2) 
 
     def transform(self, case_graph: Dict) -> Dict[str, List[Tuple[str, List[float]]]]:
         """
@@ -359,7 +359,7 @@ class FeatureStandardiser:
                 names.append(f"rf_{fname}_observed")
         return names
 
-    # ── Save / Load ─────────────────────────────────────────────────────────
+    #Save / Load 
 
     def _compute_hash(self) -> str:
         raw = json.dumps({k: s.to_dict() for k, s in self._schemas.items()}, sort_keys=True)
@@ -388,7 +388,7 @@ class FeatureStandardiser:
         return "\n".join(lines)
 
 
-# ── Adapter: load case graph from v7 CSV exports ───────────────────────────────
+#  Adapter: load case graph from v7 CSV exports 
 
 def load_case_graph_from_exports(nodes_csv: str, edges_csv: str) -> Dict:
     """
@@ -411,7 +411,7 @@ def load_case_graph_from_exports(nodes_csv: str, edges_csv: str) -> Dict:
     return {"nodes": nodes_list, "edges": edges_list}
 
 
-# ── v7-schema factory ──────────────────────────────────────────────────────────
+#  v7-schema factory 
 
 def make_v7_schema(variant: str = "predictive") -> FeatureStandardiser:
     """
@@ -423,7 +423,7 @@ def make_v7_schema(variant: str = "predictive") -> FeatureStandardiser:
     return std
 
 
-# ── Demo / self-test ───────────────────────────────────────────────────────────
+#  Demo / self-test 
 
 if __name__ == "__main__":
     # Minimal smoke test with two synthetic cases

@@ -42,7 +42,7 @@ GRAPH_VARIANT = "predictive"   # Always predictive for GNN (P5)
 PLACEHOLDERS = {"not applicable", "none", "unknown", "not known", "n/a", "", "nan"}
 
 
-# HELPER FUNCTIONS (same as to notebook)
+# HELPER FUNCTIONS (same as my notebook)
 
 def norm_str(x):
     if x is None: return None
@@ -187,10 +187,7 @@ def canonical_factor_key(col):
 
 
 def infer_stage(raw, col):
-    # Explicit schema-level overrides take precedence over data-dependent
-    # text parsing — otherwise the stage of a column can flip between cases
-    # depending on what the case coder wrote in the cell, which breaks the
-    # P8 invariant of stable feature-vector dimensions.
+ 
     if col in FACTOR_STAGE_DEFAULT: return FACTOR_STAGE_DEFAULT[col]
     st = parse_stage_text(raw)
     if st: return st

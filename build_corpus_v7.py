@@ -51,7 +51,6 @@ import torch
 from torch_geometric.data import HeteroData
 import torch_geometric.transforms as T
 
-# Import shared helpers from existing pipeline file (same directory)
 sys.path.insert(0, str(Path(__file__).parent))
 from build_heterodata_v7 import (
     _age_feat,
