@@ -27,7 +27,7 @@ Developed as part of an MSc thesis in Software Design at IT University of Copenh
 
 ## Schema version: v7-2-3
 
-The v7 schema implements nine design principles (P1–P9):
+The v7 schema implements nine design principles (P1-P9):
 
 | # | Principle | Core rule |
 |---|-----------|-----------|
