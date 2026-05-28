@@ -58,7 +58,7 @@ The v7 schema implements nine design principles (P1–P9):
 
 ### Canonical corpus (28 FDO cases, Appendix B)
 
-```python
+python
 # 1. Open network_singlecase_semantic_v7-2-3_gnn-2_canonical_corpus.ipynb
 # 2. Set DATA_PATH to point to Stat_FW.xlsx
 # 3. Run all cells
@@ -67,17 +67,16 @@ The v7 schema implements nine design principles (P1–P9):
 #   Directed predictive nodes: 3-9 (mean=5.4)
 #   Directed predictive edges: 21-41 (mean=29.0)
 #   Canonical corpus forward passes: 28/28 succeeded
-```
+
 
 The repository does not include the protected datasets. Place an authorised copy of `Stat_FW.xlsx` in the repository root or update `DATA_PATH` before run
 
 ---
-
 ## Graph variants
 
-**Descriptive** — full case graph including artefacts, timeline, court. For visualisation and case analysis.
+**Descriptive** full case graph including artefacts, timeline, court. For visualisation and case analysis
 
-**Predictive** — prior-stage only. No outcome data. For GNN input. Excludes:
+**Predictive** prior-stage only. No outcome data. For GNN input. Excludes:
 - Weapon / method / location nodes
 - Timeline events (crime, report, verdict)
 - Court node
@@ -117,7 +116,7 @@ The repository does not include the protected datasets. Place an authorised copy
 
 ---
 
-## Data availability and reproducibility
+## Data availaability and reproducibility
 
 The original case datasets are not included due to data protection restrictions. The code documents the graph-construction pipeline and can be run only with authorised access to structured case data following the FDO schema 
 
