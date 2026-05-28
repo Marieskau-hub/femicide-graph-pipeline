@@ -12,16 +12,16 @@ Developed as part of an MSc thesis in Software Design at IT University of Copenh
 
 | File | Description |
 |------|-------------|
-| `network_singlecase_semantic_v7-2-3_gnn-2.ipynb` | Single-case pipeline. Builds one case graph from STAT_FW.xlsx, exports GEXF/CSV, and runs a GNN prototype forward pass. Source of Tables 3, 6, and all graph figures in the thesis. |
+| `network_singlecase_semantic_v7-2-3_gnn-2.ipynb` | Single-case pipeline. Builds one case graph from STAT_FW.xlsx, exports GEXF/CSV, and runs a GNN prototype forward pass. Source of Tables 3, 6, and all graph figures in the thesis |
 | `network_singlecase_semantic_v7-2-3_gnn-2_canonical_corpus.ipynb` | Canonical corpus pipeline. Loops over all 28 FDO cases using the same construction logic as the single-case notebook, builds one HeteroData per case, and runs a corpus-level GNN forward pass. Referenced in Appendix B of the thesis. |
 | `build_corpus_v7.py` | Batch HeteroData builder (earlier implementation). Produces `femicide_corpus_v7.pt`. Superseded by the canonical corpus notebook for the thesis. |
 | `build_heterodata_v7.py` | Shared helper functions: `build_case_data()`, `_age_feat()`, `rf_vector()`, `discover_rf_keys()`. Used by `build_corpus_v7.py`. |
-| `corpus_cell_v7.py` | Utility functions extracted from the corpus build pipeline. |
+| `corpus_cell_v7.py` | Utility functions extracted from the corpus build pipeline |
 | `feature_standardiser_v7_adapted.py` | Two-pass feature standardiser. Discovers `rf_*` fields, builds corpus-wide vocabularies, encodes cases to fixed-length float vectors. |
-| `appendix_gnn_prototype.tex` | LaTeX source for Appendix B (GNN prototype code listings). |
+| `appendix_gnn_prototype.tex` | LaTeX source for Appendix B (GNN prototype code listings)|
 | `network_singlecase_semantic_v6.ipynb` | Historical reference. v6 schema with factor nodes (star topology, pre-P9). |
 | `v7_graph_v7-2-3.xlsx` | Schema specification: node types, edge types, attributes, rf_* keys. |
-| `v7_documentation.xlsx` | Full documentation: design principles P1–P9, lookup tables, function reference, v5→v6→v7 evolution. |
+| `v7_documentation.xlsx` | Full documentation: design principles P1 - P9, lookup tables, function reference, v5→v6→v7 evolution. |
 
 ---
 
@@ -56,7 +56,7 @@ The v7 schema implements nine design principles (P1-P9):
 # 6. GNN section runs a single-case prototype forward pass
 ```
 
-### Canonical corpus (28 FDO cases, Appendix B)
+### Canonical corpus (28 FDO cases, see Appendix B for this)
 
 ```python
 # 1. Open network_singlecase_semantic_v7-2-3_gnn-2_canonical_corpus.ipynb
