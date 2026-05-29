@@ -43,7 +43,7 @@ The v7 schema implements nine design principles (P1-P9):
 
 ---
 
-## Quick start
+## How to run
 
 ### Single case (produces graph figures and Tables 3, 6)
 
